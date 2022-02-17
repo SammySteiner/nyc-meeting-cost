@@ -1,25 +1,34 @@
-import logo from './logo.svg';
+import React, {useEffect, useState} from 'react';
+import SearchForm from './components/SearchForm/SearchForm';
+import SearchResults from './components/SearchResults/SearchResults';
+import MeetingTable from './components/MeetingTable/MeetingTable';
+import Cost from './components/Cost/Cost';
+import { fetchData } from './api';
 import './App.css';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const [data, setData] = useState([]);
+  const [searchResults, setSearchResults] = useState([])
+  const [meeting, setMeeting] = useState([])
+
+	useEffect(() => {
+		fetchData({ first_name: 'SAMUEL', last_name: 'STEINER' }).then(d => {
+			setData(d);
+		});
+	}, []);
+
+	console.log(data);
+	// mobile first
+
+	return (
+		<div className='App'>
+			<h1>NYC Meeting Cost Calculator</h1>
+			<SearchForm setSearchResults={setSearchResults}/>
+      <SearchResults searchResults={searchResults} setMeeting={setMeeting}/>
+      <MeetingTable meeting={meeting} setMeeting={setMeeting} />
+      <Cost meeting={meeting} />
+		</div>
+	);
 }
 
 export default App;

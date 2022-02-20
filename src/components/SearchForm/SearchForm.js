@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import Select from 'react-select';
 import { fetchData } from "../../api";
 import { agencyList } from "../../data/agencies";
 
@@ -8,21 +9,26 @@ export default function SearchForm({setSearchResults}) {
   const [last_name, setLastName] = useState("")
   const [agency, setAgency] = useState("")
 
+	const options = agencyList.map( a =>({value: a, label: a}))
+
   const handleSubmit = event => {
     event.preventDefault()
-    return fetchData({first_name, last_name, agency}).then( data => {
-      setSearchResults(data)
-    })
+    return fetchData({
+			first_name,
+			last_name,
+			agency: encodeURIComponent(agency.value),
+		}).then(data => {
+			setSearchResults(data);
+		});
   }
 
   const handleChange = event => {
+		if (event.label) return setAgency(event)
     switch (event.target.name) {
       case "first_name":
         return setFirstName(event.target.value)
       case "last_name":
         return setLastName(event.target.value)
-      case "agency":
-        return setAgency(event.target.value);
       default:
         return;
     }
@@ -52,7 +58,7 @@ export default function SearchForm({setSearchResults}) {
 				</label>
 				<label>
 					Agency:
-					<select name="agency" value={agency} onChange={handleChange}>{agencyList.map( a => <option key={a} value={a}>{a}</option>)}</select>
+					<Select name="agency" value={agency} onChange={handleChange} options={options}/>
 				</label>
 				<input type='submit' value='Submit' />
 			</form>

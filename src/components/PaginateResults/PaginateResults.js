@@ -2,8 +2,10 @@ import React from "react";
 import { fetchData } from "../../api";
 
 export default function PaginateResults({searchResults, setSearchResults}) {
-  console.log(searchResults.query);
   if (parseInt(searchResults?.count[0].count_base_salary) <= 10) return null
+
+  // should also show page # of total pages on left side
+  // on right side advanced pagination 1... 5,6,7...500 ; 123...500 ; 1...458,459,500
 
   const handleClick = event => {
     let page;

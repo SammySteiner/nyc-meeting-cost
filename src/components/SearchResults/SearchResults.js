@@ -23,7 +23,7 @@ export default function SearchResults({searchResults, setSearchResults, meeting,
 					<tr>
 						<th>Add to Meeting</th>
 						<th>Name</th>
-						<th>Agnecy</th>
+						<th>Agency</th>
 						<th>Role</th>
 						<th>Salary</th>
 					</tr>

@@ -1,5 +1,5 @@
 export default function MeetingTable({meeting, setMeeting}) {
-	// table of people with name, agency, salary, and remove from meeting button
+	// add count of people in the meeting. default is there are 0 people in this meeting
 		const RemoveFromMeeting = ({ index }) => {
 			const handleClick = () => {
 				const newMeeting = [...meeting];
@@ -22,7 +22,7 @@ export default function MeetingTable({meeting, setMeeting}) {
 					<tr>
 						<th>Remove From Meeting</th>
 						<th>Name</th>
-						<th>Agnecy</th>
+						<th>Agency</th>
 						<th>Role</th>
 						<th>Salary</th>
 					</tr>

@@ -1,18 +1,21 @@
+import PaginateResults from "../PaginateResults/PaginateResults"
+
 export default function SearchResults({searchResults, setSearchResults, meeting, setMeeting}) {
+	// because of pagination, instead of removing from list, we should disable any rows/buttons for folks who math people in the meeting
 
 	const AddToMeeting = ({index}) => {
 		const handleClick = () => {
-			const selectedPerson = searchResults[index]
-			const newResults = [...searchResults]
+			const selectedPerson = searchResults.data[index]
+			const newResults = [...searchResults.data]
 			newResults.splice(index, 1);
-			setSearchResults(newResults)
+			setSearchResults({...searchResults, data: newResults });
 			setMeeting([...meeting, selectedPerson])
 		}
 
 		return( <button type="button" name="addToMeeting" onClick={handleClick} >+</button>)
 	}
 
-	return searchResults.length > 0 ? (
+	return searchResults?.data?.length > 0 ? (
 		<div>
 			<h2>Search Results</h2>
 			<table>
@@ -25,7 +28,7 @@ export default function SearchResults({searchResults, setSearchResults, meeting,
 						<th>Salary</th>
 					</tr>
 				</thead>
-				{searchResults.map((person, index) => {
+				{searchResults.data.map((person, index) => {
 					return (
 						<tbody key={person.first_name + index}>
 							<tr>
@@ -45,6 +48,9 @@ export default function SearchResults({searchResults, setSearchResults, meeting,
 					);
 				})}
 			</table>
+			<PaginateResults searchResults={searchResults} setSearchResults={setSearchResults} />
 		</div>
-	) : null;
+	) :
+		searchResults?.count ? <p>Your search returned 0 results. Try a different search.</p> : null
+	;
 }

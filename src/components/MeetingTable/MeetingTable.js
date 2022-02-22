@@ -1,5 +1,4 @@
 export default function MeetingTable({meeting, setMeeting}) {
-	// add count of people in the meeting. default is there are 0 people in this meeting
 		const RemoveFromMeeting = ({ index }) => {
 			const handleClick = () => {
 				const newMeeting = [...meeting];
@@ -17,6 +16,7 @@ export default function MeetingTable({meeting, setMeeting}) {
 	return meeting.length > 0 ? (
 		<div>
 			<h2>MeetingTable</h2>
+			<p>There are {meeting.length} peope in this meting.</p>
 			<table>
 				<thead>
 					<tr>
@@ -48,5 +48,10 @@ export default function MeetingTable({meeting, setMeeting}) {
 				})}
 			</table>
 		</div>
-	) : null;
+	) : (
+		<p>
+			There are 0 people in this meeting. Add people the meeting to see the
+			cost.
+		</p>
+	);
 }

@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 
 export default function MeetingTable({ meeting }) {
-	// select length of meeting
+	// select duration of meeting
 	// Cost of meeting
   const [cost, setCost] = useState(0)
 

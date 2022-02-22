@@ -1,19 +1,19 @@
 import PaginateResults from "../PaginateResults/PaginateResults"
 
 export default function SearchResults({searchResults, setSearchResults, meeting, setMeeting}) {
-	// because of pagination, instead of removing from list, we should disable any rows/buttons for folks who math people in the meeting
 
-	const AddToMeeting = ({index}) => {
+	const AddToMeeting = ({ index, inMeeting }) => {
 		const handleClick = () => {
-			const selectedPerson = searchResults.data[index]
-			const newResults = [...searchResults.data]
-			newResults.splice(index, 1);
-			setSearchResults({...searchResults, data: newResults });
-			setMeeting([...meeting, selectedPerson])
-		}
+			const selectedPerson = searchResults.data[index];
+			setMeeting([...meeting, selectedPerson]);
+		};
 
-		return( <button type="button" name="addToMeeting" onClick={handleClick} >+</button>)
-	}
+		return (
+			<button type='button' name='addToMeeting' disabled={inMeeting} onClick={handleClick}>
+				+
+			</button>
+		);
+	};
 
 	return searchResults?.data?.length > 0 ? (
 		<div>
@@ -29,11 +29,12 @@ export default function SearchResults({searchResults, setSearchResults, meeting,
 					</tr>
 				</thead>
 				{searchResults.data.map((person, index) => {
+					const inMeeting = meeting.some(personInMeeting => JSON.stringify(personInMeeting) === JSON.stringify(person))
 					return (
 						<tbody key={person.first_name + index}>
-							<tr>
+							<tr className={inMeeting ? 'disabled' : ''}>
 								<td>
-									<AddToMeeting index={index} />
+									<AddToMeeting index={index} inMeeting={inMeeting} />
 								</td>
 								<td>
 									{person.first_name} {person.last_name}

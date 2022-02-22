@@ -9,8 +9,6 @@ function App() {
   const [searchResults, setSearchResults] = useState([])
   const [meeting, setMeeting] = useState([])
 
-	console.log(searchResults)
-
 	return (
 		<div className='App'>
 			<h1>NYC Meeting Cost Calculator</h1>

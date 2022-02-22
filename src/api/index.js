@@ -3,7 +3,7 @@ export const fetchData = ({first_name, last_name, agency, fiscal_year = "2021", 
   const year = `?fiscal_year=${fiscal_year}`;
   const first = first_name ? `&first_name=${first_name.toUpperCase()}` : ""
   const last = last_name ? `&last_name=${last_name.toUpperCase()}` : '';
-  const a = agency !== "undefined"
+  const a = agency !== "undefined" && agency !== "null" && agency !== ""
 			? `&agency_name=${agency.toUpperCase()}`
 			: '';
   const p = page ? `&$limit=10&$offset=${page * 10}` : '';

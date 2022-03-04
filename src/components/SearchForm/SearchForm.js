@@ -37,38 +37,39 @@ export default function SearchForm({setSearchResults}) {
   }
 
 	return (
-		<div>
-			<h2>Search Form</h2>
+		<div className='searchForm'>
+			<h2>Search for NYC Employees</h2>
 			<form onSubmit={handleSubmit}>
-				<label>
-					First Name:
+				<legend className="legend">All fields are optional</legend>
+				<label className='inputLabel'>First Name:</label>
+				<input
+					className='input'
+					type='text'
+					name='first_name'
+					value={first_name}
+					onChange={handleChange}
+				/>
+
+				<label className='inputLabel'>
+					Last Name:</label>
 					<input
-						type='text'
-						name='first_name'
-						value={first_name}
-						onChange={handleChange}
-					/>
-				</label>
-				<label>
-					Last Name:
-					<input
+						className='input'
 						type='text'
 						name='last_name'
 						value={last_name}
 						onChange={handleChange}
 					/>
-				</label>
-				<label>
-					Agency:
+				<label className='inputLabel'>
+					Agency:</label>
 					<Select
+						className='inputSelect'
 						name='agency'
 						value={agency}
 						onChange={handleChange}
 						options={options}
 						isClearable
 					/>
-				</label>
-				<input type='submit' value='Submit' />
+				<input className="submit" type='submit' value='Search' />
 			</form>
 		</div>
 	);

@@ -11,7 +11,9 @@ function App() {
 
 	return (
 		<div className='App'>
-			<h1>NYC Meeting Cost Calculator</h1>
+			<div className='heading'>
+				<h1>NYC Meeting Cost Calculator</h1>
+			</div>
 			<SearchForm setSearchResults={setSearchResults} />
 			<SearchResults
 				searchResults={searchResults}
